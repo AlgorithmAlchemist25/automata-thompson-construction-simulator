@@ -1,5 +1,5 @@
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -29,13 +29,30 @@ class ThompsonNFA:
             "symbol": symbol
         })
 
+    # Save the NFA after every construction operation
+    def save_step(self, rule, expression, description, fragment):
+
+        snapshot = {
+            "states": self.states.copy(),
+            "transitions": [t.copy() for t in self.transitions],
+            "start_state": fragment.start,
+            "accept_state": fragment.end
+        }
+
+        self.steps.append({
+            "rule": rule,
+            "expression": expression,
+            "description": description,
+            "snapshot": snapshot
+        })
+
     def build(self, postfix):
 
         stack = []
 
         for char in postfix:
 
-            # RULE 1: Basic symbol
+            # RULE 1: Basic Symbol
             if char.isalnum():
 
                 start = self.new_state()
@@ -43,13 +60,15 @@ class ThompsonNFA:
 
                 self.add_transition(start, end, char)
 
-                stack.append(Fragment(start, end))
+                fragment = Fragment(start, end)
+                stack.append(fragment)
 
-                self.steps.append({
-                    "rule": "Basic Symbol",
-                    "expression": char,
-                    "description": f"Created transition {start} --{char}--> {end}"
-                })
+                self.save_step(
+                    "Basic Symbol",
+                    char,
+                    f"Created transition {start} --{char}--> {end}",
+                    fragment
+                )
 
             # Empty string
             elif char == 'ε':
@@ -59,16 +78,21 @@ class ThompsonNFA:
 
                 self.add_transition(start, end, 'ε')
 
-                stack.append(Fragment(start, end))
+                fragment = Fragment(start, end)
+                stack.append(fragment)
 
-                self.steps.append({
-                    "rule": "Epsilon",
-                    "expression": "ε",
-                    "description": "Created an epsilon transition"
-                })
+                self.save_step(
+                    "Epsilon",
+                    "ε",
+                    "Created an epsilon transition",
+                    fragment
+                )
 
             # RULE 2: Union
             elif char == '|':
+
+                if len(stack) < 2:
+                    raise ValueError("Invalid union expression")
 
                 b = stack.pop()
                 a = stack.pop()
@@ -82,32 +106,42 @@ class ThompsonNFA:
                 self.add_transition(a.end, end, 'ε')
                 self.add_transition(b.end, end, 'ε')
 
-                stack.append(Fragment(start, end))
+                fragment = Fragment(start, end)
+                stack.append(fragment)
 
-                self.steps.append({
-                    "rule": "Union",
-                    "expression": "|",
-                    "description": f"Combined two NFAs using new states {start} and {end}"
-                })
+                self.save_step(
+                    "Union",
+                    "|",
+                    f"Combined two NFAs using new states {start} and {end}",
+                    fragment
+                )
 
             # RULE 3: Concatenation
             elif char == '.':
+
+                if len(stack) < 2:
+                    raise ValueError("Invalid concatenation expression")
 
                 b = stack.pop()
                 a = stack.pop()
 
                 self.add_transition(a.end, b.start, 'ε')
 
-                stack.append(Fragment(a.start, b.end))
+                fragment = Fragment(a.start, b.end)
+                stack.append(fragment)
 
-                self.steps.append({
-                    "rule": "Concatenation",
-                    "expression": ".",
-                    "description": f"Connected state {a.end} to state {b.start} using epsilon"
-                })
+                self.save_step(
+                    "Concatenation",
+                    ".",
+                    f"Connected state {a.end} to state {b.start} using epsilon",
+                    fragment
+                )
 
             # RULE 4: Kleene Star
             elif char == '*':
+
+                if not stack:
+                    raise ValueError("Invalid Kleene Star expression")
 
                 a = stack.pop()
 
@@ -120,13 +154,15 @@ class ThompsonNFA:
                 self.add_transition(a.end, a.start, 'ε')
                 self.add_transition(a.end, end, 'ε')
 
-                stack.append(Fragment(start, end))
+                fragment = Fragment(start, end)
+                stack.append(fragment)
 
-                self.steps.append({
-                    "rule": "Kleene Star",
-                    "expression": "*",
-                    "description": f"Added repetition and empty-string paths using states {start} and {end}"
-                })
+                self.save_step(
+                    "Kleene Star",
+                    "*",
+                    f"Added repetition and empty-string paths using states {start} and {end}",
+                    fragment
+                )
 
             else:
                 raise ValueError(f"Invalid postfix symbol: {char}")
@@ -137,8 +173,8 @@ class ThompsonNFA:
         final_fragment = stack.pop()
 
         return {
-            "states": self.states,
-            "transitions": self.transitions,
+            "states": self.states.copy(),
+            "transitions": [t.copy() for t in self.transitions],
             "start_state": final_fragment.start,
             "accept_state": final_fragment.end,
             "steps": self.steps
