@@ -4,7 +4,7 @@ import { constructNFA } from "../services/api";
 import { Regex } from "lucide-react";
 
 export default function RegexInput({ onNFAReceived }) {
-    const [regex, setRegex] = useState("(a|b)*abb");
+    const [regex, setRegex] = useState("a*b");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 

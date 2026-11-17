@@ -1,689 +1,690 @@
 
-/* =====================================
-   FINAL UI POLISH - THOMPSON SIMULATOR
-===================================== */
+/* ==================================================
+   THOMPSON'S CONSTRUCTION SIMULATOR
+   CLEAN DARK DASHBOARD LAYOUT
+================================================== */
+
+:root {
+    --bg: #0b1120;
+    --panel: #111c2e;
+    --panel-light: #19283f;
+    --panel-hover: #1d304a;
+    --border: #293c57;
+    --text: #e5edf8;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-dark: #0284c7;
+}
 
 * {
     box-sizing: border-box;
 }
-
-.app-container {
-    min-height: 100vh;
-    background: #f1f5f9;
-    color: #1e293b;
-}
-
-.app-header {
-    background: linear-gradient(120deg, #172554, #1e40af);
-    padding: 32px 5%;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.12);
-}
-
-.app-header h1 {
-    font-size: clamp(23px, 3vw, 32px);
-    letter-spacing: -0.6px;
-    margin: 0;
-}
-
-.app-header p {
-    font-size: 14px;
-}
-
-.dashboard {
-    max-width: 1600px;
-    padding: 32px 4%;
-}
-
-.regex-card,
-.graph-container,
-.steps-card,
-.tester-card,
-.table-card,
-.welcome-card,
-.construction-animation {
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.045);
-    transition: box-shadow 0.2s ease;
-}
-
-.regex-card:hover,
-.graph-container:hover,
-.steps-card:hover,
-.tester-card:hover,
-.table-card:hover {
-    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.075);
-}
-
-/* Input improvements */
-
-.regex-controls input,
-.tester-controls input {
-    min-height: 48px;
-    background: #ffffff;
-    font-size: 15px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.regex-controls input:focus,
-.tester-controls input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-}
-
-.primary-btn,
-.secondary-btn,
-.animation-btn {
-    min-height: 42px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.primary-btn:hover:not(:disabled),
-.animation-btn.primary:hover:not(:disabled) {
-    background: #1d4ed8;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-}
-
-.primary-btn:disabled,
-.secondary-btn:disabled,
-.animation-btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
-
-/* Better error messages */
-
-.error-message {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    background: #fef2f2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
-    border-left: 4px solid #dc2626;
-    border-radius: 9px;
-    padding: 12px 15px;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-/* Statistics cards */
-
-.stats-grid {
-    gap: 18px;
-}
-
-.stat-card {
-    border-radius: 14px;
-    padding: 23px;
-    transition: transform 0.2s ease,
-                box-shadow 0.2s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
-}
-
-.stat-card h2 {
-    font-size: 29px;
-    font-weight: 800;
-}
-
-/* Dashboard layout */
-
-.content-grid {
-    grid-template-columns: minmax(0, 2.2fr) minmax(300px, 0.9fr);
-    gap: 24px;
-}
-
-.main-column,
-.side-column {
-    min-width: 0;
-}
-
-/* Graph improvements */
-
-.graph-container {
-    overflow: hidden;
-}
-
-.graph-heading {
-    margin-bottom: 20px;
-}
-
-.graph-heading h3 {
-    color: #1e293b;
-    font-size: 21px;
-}
-
-.graph-canvas {
-    height: clamp(430px, 52vw, 650px);
-    background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #dbe3ef;
-}
-
-.graph-legend {
-    gap: 18px;
-    padding: 5px 2px;
-    font-size: 13px;
-}
-
-/* Construction animation */
-
-.construction-animation {
-    padding: 26px;
-    background: linear-gradient(145deg, #ffffff, #f8fbff);
-}
-
-.animation-header h2 {
-    font-size: 22px;
-    letter-spacing: -0.4px;
-}
-
-.current-step-card {
-    border: 1px solid #dbeafe;
-    border-left: 5px solid #2563eb;
-    background: #f8fbff;
-    padding: 21px;
-}
-
-.step-rule {
-    letter-spacing: 0.2px;
-}
-
-.animation-controls {
-    gap: 12px;
-}
-
-.animation-btn {
-    padding: 12px 20px;
-    border-radius: 9px;
-}
-
-/* Construction step panel */
-
-.steps-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.steps-card .section-heading h3 {
-    color: #172554;
-}
-
-.construction-step-item {
-    min-height: 62px;
-    border-radius: 10px;
-    padding: 12px 14px;
-}
-
-.construction-step-item:hover {
-    background: #f8fafc;
-    border-color: #93c5fd;
-}
-
-.construction-step-item.selected {
-    background: #eff6ff;
-    border: 2px solid #2563eb;
-    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.08);
-}
-
-.construction-step-item.completed {
-    background: #f0fdf4;
-}
-
-.operation-details strong {
-    font-size: 14px;
-}
-
-/* String simulator */
-
-.tester-card {
-    padding: 24px;
-}
-
-.simulation-result {
-    border-radius: 12px;
-}
-
-.result-success,
-.result-failure {
-    border-radius: 10px;
-    padding: 17px;
-}
-
-/* Transition table */
-
-.table-card {
-    overflow: hidden;
-}
-
-.transition-table th {
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.transition-table td {
-    font-size: 14px;
-}
-
-.transition-table tbody tr:hover {
-    background: #f8fafc;
-}
-
-/* Welcome section */
-
-.welcome-card {
-    padding: 75px 20px;
-}
-
-.welcome-card h2 {
-    color: #172554;
-    font-size: 28px;
-}
-
-/* Smooth interactions */
-
-button:focus-visible,
-input:focus-visible {
-    outline: 3px solid rgba(37, 99, 235, 0.25);
-    outline-offset: 2px;
-}
-
-/* Tablet */
-
-@media (max-width: 1050px) {
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .side-column {
-        width: 100%;
-    }
-
-    .graph-canvas {
-        height: 480px;
-    }
-}
-
-/* Mobile */
-
-@media (max-width: 600px) {
-    .app-header {
-        padding: 24px 18px;
-    }
-
-    .dashboard {
-        padding: 20px 12px;
-    }
-
-    .regex-card,
-    .graph-container,
-    .steps-card,
-    .tester-card,
-    .table-card,
-    .construction-animation {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-    }
-
-    .stat-card {
-        padding: 15px;
-    }
-
-    .stat-card h2 {
-        font-size: 23px;
-    }
-
-    .graph-canvas {
-        height: 430px;
-    }
-
-    .animation-controls {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .animation-btn {
-        width: 100%;
-        padding: 10px;
-    }
-
-    .step-buttons {
-        gap: 8px;
-    }
-
-    .step-buttons button {
-        flex: 1;
-    }
-
-    .transition-table th,
-    .transition-table td {
-        padding: 10px;
-        white-space: nowrap;
-    }
-
-    .animation-header {
-        gap: 10px;
-    }
-
-    .step-counter {
-        font-size: 12px;
-    }
-}
-
-
-
-/* =========================================
-   DARK DASHBOARD THEME
-   THOMPSON CONSTRUCTION SIMULATOR
-========================================= */
-
-:root {
-    --bg-main: #0b1120;
-    --bg-panel: #111c2e;
-    --bg-panel-light: #17243a;
-    --border-dark: #26364f;
-    --text-main: #e5edf8;
-    --text-muted: #94a3b8;
-    --accent: #38bdf8;
-    --accent-hover: #0ea5e9;
-}
-
-/* Overall page */
 
 html,
 body,
 #root {
     min-height: 100%;
     margin: 0;
-    background: var(--bg-main);
+    width: 100%;
 }
 
 body {
-    color: var(--text-main);
+    font-family: Inter, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
 }
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
 
 .app-container {
     min-height: 100vh;
-    background:
-        radial-gradient(ellipse at top, #15233a 0%, transparent 55%),
-        var(--bg-main);
-    color: var(--text-main);
+    width: 100%;
+    background: var(--bg);
+    color: var(--text);
 }
 
-/* Header */
-
 .app-header {
-    background: rgba(15, 25, 43, 0.96);
-    border-bottom: 1px solid var(--border-dark);
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    padding: 25px 5%;
+    width: 100%;
+    padding: 20px 4%;
+    background: #101a2b;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .app-header h1 {
     color: #f8fafc;
+    font-size: clamp(21px, 2.2vw, 29px);
     font-weight: 750;
+    margin: 0 0 5px;
 }
 
 .app-header p {
-    color: #94a3b8;
-    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
 }
 
-/* Dashboard */
+.header-badge {
+    color: var(--accent);
+    background: #172b43;
+    border: 1px solid #29435e;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   DASHBOARD BASE
+========================= */
 
 .dashboard {
-    max-width: 1700px;
+    width: 100%;
+    max-width: 1800px;
     margin: 0 auto;
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-/* All main panels */
+.input-column,
+.visual-column,
+.animation-column,
+.steps-column,
+.tool-column {
+    min-width: 0;
+    width: 100%;
+}
+
+/* =========================
+   ROW 1
+   REGEX INPUT | NFA GRAPH
+========================= */
+
+.top-layout {
+    display: grid;
+    grid-template-columns: minmax(290px, 0.75fr) minmax(0, 2fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.visual-column {
+    min-width: 0;
+    display: flex;
+}
+
+.visual-column > * {
+    width: 100%;
+}
+
+/* =========================
+   SHARED PANEL STYLE
+========================= */
 
 .regex-card,
 .graph-container,
+.construction-animation,
 .steps-card,
 .tester-card,
 .table-card,
-.construction-animation,
 .welcome-card {
-    background: var(--bg-panel);
-    border: 1px solid var(--border-dark);
-    border-radius: 15px;
-    color: var(--text-main);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    color: var(--text);
+    min-width: 0;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+.regex-card,
+.graph-container,
+.construction-animation,
+.steps-card,
+.tester-card,
+.table-card {
+    padding: 20px;
 }
 
 .regex-card:hover,
 .graph-container:hover,
+.construction-animation:hover,
 .steps-card:hover,
 .tester-card:hover,
 .table-card:hover {
-    border-color: #385273;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border-color: #385473;
 }
 
-/* Headings and descriptions */
+/* =========================
+   REGEX INPUT
+========================= */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-.section-heading h3,
-.graph-heading h3,
-.animation-header h2 {
-    color: #eaf2ff;
+.regex-card {
+    width: 100%;
 }
 
-p {
-    color: var(--text-muted);
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
-/* Input fields */
+.section-heading h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+}
+
+.regex-controls {
+    display: flex;
+    align-items: stretch;
+    gap: 9px;
+    width: 100%;
+}
 
 .regex-controls input,
-.tester-controls input,
-input.form-control {
+.tester-controls input {
+    min-width: 0;
+    flex: 1;
+    width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: 0 12px;
+    color: var(--text);
     background: #0b1526;
-    color: #e5edf8;
-    border: 1px solid #34445d;
-    border-radius: 9px;
-}
-
-.regex-controls input::placeholder,
-.tester-controls input::placeholder,
-input.form-control::placeholder {
-    color: #64748b;
+    border: 1px solid #344760;
+    border-radius: 8px;
+    outline: none;
 }
 
 .regex-controls input:focus,
-.tester-controls input:focus,
-input.form-control:focus {
-    background: #0b1526;
-    color: white;
+.tester-controls input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
 }
 
-/* Buttons */
+.regex-controls input::placeholder,
+.tester-controls input::placeholder {
+    color: #718198;
+}
+
+.operator-help {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 12px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn,
+.secondary-btn,
+.reset-btn,
+.animation-btn {
+    min-height: 40px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s;
+}
 
 .primary-btn,
 .animation-btn.primary {
-    background: #0284c7;
     color: white;
-    border: 1px solid #0284c7;
-    border-radius: 9px;
+    background: var(--accent-dark);
+    border: 1px solid var(--accent-dark);
 }
 
 .primary-btn:hover:not(:disabled),
 .animation-btn.primary:hover:not(:disabled) {
     background: #0369a1;
-    border-color: #0369a1;
 }
 
 .secondary-btn,
-.animation-btn {
-    background: #1e2d43;
+.reset-btn,
+.animation-btn.secondary {
     color: #dbeafe;
-    border: 1px solid #3a4b65;
-    border-radius: 9px;
+    background: #1e2d43;
+    border: 1px solid #3a4e69;
 }
 
 .secondary-btn:hover:not(:disabled),
-.animation-btn:hover:not(:disabled) {
-    background: #2b3d57;
-    border-color: #64748b;
+.reset-btn:hover:not(:disabled),
+.animation-btn.secondary:hover:not(:disabled) {
+    background: #2a3d57;
 }
 
-/* Statistics cards */
+.regex-controls .primary-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
 
 .stat-card {
-    background: linear-gradient(145deg, #172840, #111c2e);
-    border: 1px solid #2b405d;
-    color: #e5edf8;
+    min-width: 0;
+    padding: 16px;
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+}
+
+.stat-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
 }
 
 .stat-card h2 {
-    color: #38bdf8;
+    margin: 7px 0 0;
+    color: var(--accent);
+    font-size: 26px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
 }
 
-.stat-card:hover {
-    border-color: #38bdf8;
-}
-
-/* Graph panel */
+/* =========================
+   NFA GRAPH
+========================= */
 
 .graph-container {
-    background: var(--bg-panel);
-    padding: 24px;
-}
-
-.graph-heading h3 {
-    color: #e5edf8;
-}
-
-.graph-canvas {
-    background: #0b1526;
-    border: 1px solid #2b3d57;
-    border-radius: 12px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
-/* React Flow graph */
+.graph-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.graph-heading h3 {
+    color: var(--text);
+    font-size: 19px;
+    margin: 0;
+}
+
+.graph-heading span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.construction-info {
+    background: #172b43;
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+.construction-info strong {
+    color: #7dd3fc;
+}
+
+.construction-info p {
+    color: var(--muted);
+    margin: 5px 0 0;
+}
+
+.graph-canvas {
+    width: 100%;
+    height: 440px;
+    min-height: 350px;
+    background: #0b1526;
+    border: 1px solid #293d58;
+    border-radius: 9px;
+    overflow: hidden;
+}
 
 .graph-canvas .react-flow {
     background: #0b1526;
 }
 
-.graph-canvas .react-flow__background {
-    background-color: #0b1526;
-}
-
-.graph-canvas .react-flow__controls {
-    background: #17243a;
-    border: 1px solid #34445d;
-    box-shadow: none;
-}
-
+.graph-canvas .react-flow__controls,
 .graph-canvas .react-flow__controls-button {
-    background: #17243a;
-    border-bottom: 1px solid #34445d;
-    fill: #e5edf8;
+    background: #19283f;
+    color: white;
+    border-color: #344760;
+    fill: white;
 }
 
 .graph-canvas .react-flow__controls-button:hover {
-    background: #263b57;
+    background: #2a3e58;
 }
 
 .graph-canvas .react-flow__minimap {
-    background: #17243a;
-    border: 1px solid #34445d;
-}
-
-.graph-canvas .react-flow__attribution {
-    background: #17243a;
-    color: #94a3b8;
-}
-
-.graph-canvas .react-flow__edge-textbg {
-    fill: #17243a;
+    background: #19283f;
+    border: 1px solid #344760;
 }
 
 .graph-canvas .react-flow__edge-text {
     fill: #e5edf8;
 }
 
-.graph-canvas .react-flow__node {
-    color: #e5edf8;
+.graph-canvas .react-flow__edge-textbg {
+    fill: #19283f;
 }
-
-/* Graph legend */
 
 .graph-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding-top: 14px;
     color: #cbd5e1;
+    font-size: 12px;
 }
 
-/* Construction animation */
+/* =========================
+   EMPTY / WELCOME GRAPH
+========================= */
+
+.welcome-card {
+    width: 100%;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.welcome-card h2 {
+    color: var(--text);
+    font-size: 23px;
+}
+
+.welcome-card p {
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.7;
+}
+
+.example-regex {
+    background: #172b43;
+    border: 1px solid #29445f;
+    border-radius: 8px;
+    padding: 10px 18px;
+    color: #7dd3fc;
+}
+
+/* =========================
+   ROW 2
+   ANIMATION | CONSTRUCTION STEPS
+========================= */
+
+.lower-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+.animation-column,
+.steps-column {
+    min-width: 0;
+    display: flex;
+}
+
+.animation-column > *,
+.steps-column > * {
+    width: 100%;
+}
+
+/* Animation panel */
 
 .construction-animation {
-    background: linear-gradient(145deg, #15243a, #101a2b);
-    padding: 26px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.animation-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .animation-header h2 {
-    color: #e5edf8;
+    margin: 0;
+    color: var(--text);
+    font-size: 21px;
 }
 
+.animation-header p {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.step-counter {
+    flex-shrink: 0;
+    color: #7dd3fc;
+    background: #172b43;
+    border: 1px solid #29445f;
+    border-radius: 7px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Progress bar */
+
+.progress-track {
+    width: 100%;
+    height: 6px;
+    background: #26364d;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: inherit;
+    transition: width 0.25s ease;
+}
+
+/* Current step */
+
 .current-step-card {
-    background: #172c46;
-    border: 1px solid #294d70;
-    border-left: 4px solid #38bdf8;
-    border-radius: 10px;
-    color: #e5edf8;
+    width: 100%;
+    min-height: 130px;
+    padding: 20px;
+    background: #172b43;
+    border: 1px solid #294b69;
+    border-left: 4px solid var(--accent);
+    border-radius: 9px;
 }
 
 .step-rule {
     color: #7dd3fc;
+    font-size: 14px;
+    font-weight: 700;
 }
 
-/* Step panel */
+.current-step-card h3 {
+    color: #f1f5f9;
+    font-size: 22px;
+    margin: 9px 0;
+}
+
+.current-step-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Animation controls */
+
+.animation-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.animation-btn {
+    min-width: 90px;
+}
+
+/* =========================
+   CONSTRUCTION STEPS PANEL
+========================= */
 
 .steps-card {
-    background: var(--bg-panel);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    overflow: hidden;
+}
+
+.steps-card .section-heading {
+    margin-bottom: 0;
 }
 
 .steps-card .section-heading h3 {
-    color: #e5edf8;
+    color: var(--text);
 }
 
-.construction-step-item {
-    background: #142238;
-    border: 1px solid #2b3d57;
-    color: #cbd5e1;
+.step-progress {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.step-content {
+    padding: 14px;
+    background: #172b43;
+    border: 1px solid #29445f;
     border-radius: 9px;
 }
 
+.step-number {
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.step-content h4 {
+    color: var(--text);
+    margin: 8px 0;
+    font-size: 17px;
+}
+
+.step-content p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 9px;
+}
+
+.step-expression {
+    color: #7dd3fc;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.all-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-height: 0;
+}
+
+.all-steps-list > h4 {
+    color: #cbd5e1;
+    font-size: 13px;
+    margin: 0 0 3px;
+}
+
+.construction-step-item {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    padding: 9px 11px;
+    color: #cbd5e1;
+    background: #142238;
+    border: 1px solid #2b3d57;
+    border-radius: 8px;
+}
+
 .construction-step-item:hover {
-    background: #1d304a;
-    border-color: #38bdf8;
+    background: var(--panel-hover);
+    border-color: var(--accent);
 }
 
 .construction-step-item.selected {
     background: #153651;
-    border: 1px solid #38bdf8;
+    border: 1px solid var(--accent);
     color: #e0f2fe;
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.08);
 }
 
 .construction-step-item.completed {
@@ -691,81 +692,212 @@ input.form-control:focus {
     border-color: #27665b;
 }
 
-.operation-details strong {
-    color: #e5edf8;
+.operation-number {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #253b55;
+    color: #cbd5e1;
+    font-size: 11px;
 }
 
-/* String simulator */
+.operation-details {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.operation-details strong {
+    color: #e5edf8;
+    font-size: 12px;
+}
+
+.operation-details small {
+    color: var(--muted);
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+/* Step navigation */
+
+.step-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.step-buttons button {
+    flex: 1;
+    min-width: 0;
+}
+
+.reset-btn {
+    align-self: flex-start;
+}
+
+/* =========================
+   ROW 3
+   STRING TESTER | TABLE
+========================= */
+
+.tools-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    align-items: start;
+}
+
+.tool-column {
+    display: flex;
+    min-width: 0;
+}
+
+.tool-column > * {
+    width: 100%;
+}
+
+/* String tester */
 
 .tester-card {
-    background: var(--bg-panel);
-    padding: 24px;
+    width: 100%;
+}
+
+.tester-controls {
+    display: flex;
+    align-items: stretch;
+    gap: 9px;
+}
+
+.tester-controls .primary-btn {
+    flex-shrink: 0;
 }
 
 .simulation-result {
+    margin-top: 17px;
+    padding: 14px;
     background: #17243a;
     border: 1px solid #34445d;
+    border-radius: 9px;
+}
+
+.result-success,
+.result-failure {
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 .result-success {
-    background: #12352d;
     color: #86efac;
+    background: #12352d;
     border: 1px solid #22634e;
 }
 
 .result-failure {
-    background: #3b1d2a;
     color: #fda4af;
+    background: #3b1d2a;
     border: 1px solid #793548;
+}
+
+.simulation-result > p,
+.simulation-navigation p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.simulation-navigation h4 {
+    color: var(--text);
+    font-size: 15px;
 }
 
 /* Transition table */
 
 .table-card {
-    background: var(--bg-panel);
+    width: 100%;
+    overflow: hidden;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }
 
 .transition-table {
+    width: 100%;
+    border-collapse: collapse;
     color: #dbeafe;
+    font-size: 13px;
 }
 
 .transition-table th {
     background: #1b2b42;
     color: #7dd3fc;
-    border-color: #34445d;
+    font-weight: 700;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #34445d;
+    white-space: nowrap;
 }
 
 .transition-table td {
     background: #111c2e;
     color: #cbd5e1;
-    border-color: #26364f;
+    padding: 11px 12px;
+    border-bottom: 1px solid #26364f;
 }
 
 .transition-table tbody tr:hover td {
     background: #1b2d45;
-    color: white;
 }
 
-/* Welcome panel */
-
-.welcome-card {
-    background: var(--bg-panel);
+.epsilon-label,
+.symbol-label {
+    display: inline-block;
+    min-width: 25px;
+    text-align: center;
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: #1d3852;
+    color: #7dd3fc;
+    font-weight: 700;
 }
 
-.welcome-card h2 {
-    color: #e5edf8;
-}
-
-/* Error message */
+/* =========================
+   ERRORS
+========================= */
 
 .error-message {
-    background: #3b1d2a;
     color: #fda4af;
-    border-color: #793548;
-    border-left-color: #f43f5e;
+    background: #3b1d2a;
+    border: 1px solid #793548;
+    border-left: 4px solid #f43f5e;
+    border-radius: 8px;
+    padding: 11px 13px;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
-/* Scrollbars */
+/* =========================
+   FOOTER
+========================= */
+
+.app-container footer {
+    padding: 18px;
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* =========================
+   SCROLLBARS
+========================= */
 
 * {
     scrollbar-width: thin;
@@ -773,8 +905,8 @@ input.form-control:focus {
 }
 
 *::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
 }
 
 *::-webkit-scrollbar-track {
@@ -786,276 +918,100 @@ input.form-control:focus {
     border-radius: 10px;
 }
 
-/* Focus */
-
-button:focus-visible,
-input:focus-visible {
-    outline: 2px solid #38bdf8;
-    outline-offset: 3px;
-}
-
-/* Responsive */
-
-@media (max-width: 600px) {
-    .app-header {
-        padding: 22px 18px;
-    }
-
-    .dashboard {
-        padding: 18px 12px;
-    }
-
-    .regex-card,
-    .graph-container,
-    .steps-card,
-    .tester-card,
-    .table-card,
-    .construction-animation {
-        padding: 16px;
-    }
-}
-
-
-
-/* =========================================
-   TWO-COLUMN DASHBOARD LAYOUT
-========================================= */
-
-.dashboard {
-    width: 100%;
-    max-width: 1750px;
-    margin: 0 auto;
-    padding: 28px 3%;
-}
-
-/* Top: input on left, graph on right */
-
-.top-layout {
-    display: grid;
-    grid-template-columns: minmax(280px, 0.75fr) minmax(0, 2fr);
-    gap: 22px;
-    align-items: start;
-}
-
-.input-column,
-.visual-column,
-.animation-column,
-.steps-column,
-.tool-column {
-    min-width: 0;
-}
-
-.input-column {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.visual-column .graph-container {
-    height: 100%;
-}
-
-/* Statistics: 2 x 2 */
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.stat-card {
-    min-width: 0;
-    padding: 18px;
-}
-
-.stat-card h2 {
-    margin: 8px 0 0;
-}
-
-/* Bottom: animation left, steps right */
-
-.lower-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
-    gap: 22px;
-    margin-top: 22px;
-    align-items: start;
-}
-
-.animation-column,
-.steps-column {
-    width: 100%;
-}
-
-.steps-column .steps-card {
-    height: 100%;
-}
-
-/* Testing and transition table */
-
-.tools-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 22px;
-    margin-top: 22px;
-    align-items: start;
-}
-
-.tool-column {
-    width: 100%;
-}
-
-.tool-column > * {
-    height: 100%;
-}
-
-/* Welcome panel */
-
-.visual-column .welcome-card {
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 35px;
-}
-
-/* Tablet */
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width: 1000px) {
+    .dashboard {
+        padding: 18px;
+    }
+
     .top-layout {
-        grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.5fr);
+        grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.4fr);
     }
 
     .lower-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
 
-    .steps-column .steps-card {
-        height: auto;
+    .graph-canvas,
+    .welcome-card {
+        height: 380px;
+        min-height: 380px;
     }
 }
 
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 700px) {
+    .app-header {
+        padding: 18px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
     .dashboard {
-        padding: 18px 12px;
+        padding: 13px;
+        gap: 13px;
     }
 
     .top-layout,
     .lower-layout,
     .tools-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 13px;
+    }
+
+    .regex-card,
+    .graph-container,
+    .construction-animation,
+    .steps-card,
+    .tester-card,
+    .table-card {
+        padding: 15px;
+    }
+
+    .graph-canvas,
+    .welcome-card {
+        height: 350px;
+        min-height: 350px;
+    }
+
+    .animation-header {
+        flex-direction: column;
+    }
+
+    .animation-controls {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .animation-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tester-controls {
+        flex-direction: column;
+    }
+
+    .tester-controls button {
+        width: 100%;
+    }
+
+    .regex-controls {
+        flex-wrap: wrap;
+    }
+
+    .regex-controls input,
+    .regex-controls button {
+        width: 100%;
     }
 
     .stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .visual-column .welcome-card {
-        min-height: 240px;
-    }
-}
-
-
-/* =====================================
-   REGEX INPUT PANEL POSITION FIX
-===================================== */
-
-/* Make left input column compact */
-.top-layout {
-    display: grid;
-    grid-template-columns: minmax(290px, 340px) minmax(0, 1fr);
-    gap: 22px;
-    align-items: start;
-}
-
-/* Regex card */
-.regex-card {
-    width: 100%;
-    max-width: 100%;
-    padding: 20px;
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-/* Regex heading */
-.regex-card h2 {
-    font-size: 23px !important;
-    line-height: 1.3;
-    margin: 0 0 10px;
-}
-
-/* Description */
-.regex-card p {
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 0 0 16px;
-}
-
-/* Input and button alignment */
-.regex-controls {
-    display: flex;
-    align-items: stretch;
-    gap: 10px;
-    width: 100%;
-}
-
-.regex-controls input {
-    flex: 1;
-    min-width: 0;
-    width: 100%;
-    height: 44px;
-    min-height: 44px;
-    font-size: 14px;
-}
-
-.regex-controls button {
-    flex-shrink: 0;
-    height: 44px;
-    min-height: 44px;
-    padding: 0 15px;
-    font-size: 14px;
-    white-space: nowrap;
-}
-
-/* Regex instructions */
-.regex-card .regex-help,
-.regex-card small {
-    font-size: 12px;
-    line-height: 1.6;
-    color: #94a3b8;
-    margin-top: 12px;
-}
-
-/* Statistics alignment */
-.input-column .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-}
-
-/* Graph should occupy remaining space */
-.visual-column {
-    width: 100%;
-    min-width: 0;
-}
-
-/* Tablet */
-@media (max-width: 900px) {
-    .top-layout {
-        grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.5fr);
-    }
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-    .top-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .regex-card {
-        max-width: 100%;
     }
 }
