@@ -77,10 +77,10 @@ export default function RegexInput({ onNFAReceived }) {
             )}
 
             <div className="operator-help">
-                <span>| = Union</span>
-                <span>* = Kleene Star</span>
-                <span>ε = Epsilon</span>
-                <span>() = Grouping</span>
+                <span>| = Union </span>
+                <span> * = Kleene Star </span>
+                <span> ε = Epsilon </span>
+                <span> () = Grouping </span>
             </div>
 
         </div>
